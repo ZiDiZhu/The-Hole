@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     //public Player player;
 
+    public int dayPhase = 1; //1 represents AM, 2 represents lunchtime, 3 represents PM
+    public GameObject table;
+
     public int floorNum;
     public int monthCount;
     public int dayCount = 0;
@@ -22,10 +25,18 @@ public class GameManager : MonoBehaviour
         //player = GetComponent<Player>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         dayText.text = "Day " + dayCount;
+        monthText.text = "Month " + monthCount;
+
+        if (dayPhase == 1) { timeText.text = "A.M."; table.SetActive(false); }
+        else if(dayPhase == 2) { timeText.text = "LUNCH"; table.SetActive(true); }
+        else if(dayPhase == 3) { timeText.text = "P.M."; table.SetActive(false); }
+        else if(dayPhase == 4) { dayCount += 1; dayPhase = 1; }
+
+        if(dayCount == 4 ) { monthCount += 1; dayCount = 1; } //yes,theres 3days in a month for testing
     }
 
 }

@@ -67,6 +67,6 @@ public class Player : MonoBehaviour
         healthLevel += 10;
         foodLevel -= 20;
 
-        gm.dayCount += 1;
+        gm.dayPhase += 1;
     }
 }

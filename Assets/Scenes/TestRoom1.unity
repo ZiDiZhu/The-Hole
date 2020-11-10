@@ -3180,7 +3180,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8383395, y: 0.16835561}
   m_AnchorMax: {x: 0.8383395, y: 0.16835561}
-  m_AnchoredPosition: {x: 0, y: 66}
+  m_AnchoredPosition: {x: 0, y: 18}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328141294
@@ -3207,7 +3207,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.11372549}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3226,7 +3226,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1225198679}
+      - m_Target: {fileID: 1843970800}
         m_MethodName: Sleep
         m_Mode: 1
         m_Arguments:
@@ -4544,7 +4544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   movement: {x: 0, y: 0, z: 0}
-  gm: {fileID: 0}
+  gm: {fileID: 1225198679}
   foodLevel: 50
   healthLevel: 50
   sanityLevel: 50
@@ -4754,6 +4754,46 @@ PrefabInstance:
       propertyPath: dayText
       value: 
       objectReference: {fileID: 1969384948}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 2065432962}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: floorText
+      value: 
+      objectReference: {fileID: 239890033}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: lowerFloorText
+      value: 
+      objectReference: {fileID: 2127237505}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: monthText
+      value: 
+      objectReference: {fileID: 106065841}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1843970800}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: table
+      value: 
+      objectReference: {fileID: 221964512}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: monthCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083839131459442905, guid: 4220dc7c861ebd440b78975ed8a06de5,
+        type: 3}
+      propertyPath: dayCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4220dc7c861ebd440b78975ed8a06de5, type: 3}
 --- !u!1 &2065432960
