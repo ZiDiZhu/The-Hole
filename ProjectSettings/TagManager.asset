@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Roommate
+  - Bed
+  - Table
   layers:
   - Default
   - TransparentFX
@@ -41,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer
+  - name: new
     uniqueID: 3388009179
+    locked: 0
+  - name: New Layer
+    uniqueID: 714230069
     locked: 0
