@@ -28,15 +28,20 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+
+    }
+
+    public void UpdateEnvironment()
+    {
         dayText.text = "Day " + dayCount;
         monthText.text = "Month " + monthCount;
 
         if (dayPhase == 1) { timeText.text = "A.M."; table.SetActive(false); }
-        else if(dayPhase == 2) { timeText.text = "LUNCH"; table.SetActive(true); }
-        else if(dayPhase == 3) { timeText.text = "P.M."; table.SetActive(false); }
-        else if(dayPhase == 4) { dayCount += 1; dayPhase = 1; }
+        else if (dayPhase == 2) { timeText.text = "LUNCH"; table.SetActive(true); }
+        else if (dayPhase == 3) { timeText.text = "P.M."; table.SetActive(false); }
+        else if (dayPhase == 4) { dayCount += 1; dayPhase = 1; }
 
-        if(dayCount == 4 ) { monthCount += 1; dayCount = 1; } //yes,theres 3days in a month for testing
+        if (dayCount == 4) { monthCount += 1; dayCount = 1; } //yes,theres 3days in a month for testing
     }
 
 }
