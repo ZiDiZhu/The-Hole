@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public void UpdateEnvironment()
     {
         floorText.text = "" + floorNum;
+        lowerFloorText.text = "" + (floorNum + 1);
 
         dayText.text = "Day " + dayCount;
         monthText.text = "Month " + monthCount;

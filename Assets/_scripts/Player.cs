@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public int healthLevel;
     public int sanityLevel;
 
+    public Button eatButton;
     public Button sleepButton;
     public Button talkButton;
 
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
 
         sleepButton.interactable = false;
         talkButton.interactable = false;
+        eatButton.interactable = false;
     }
 
     void Update()
@@ -71,6 +73,10 @@ public class Player : MonoBehaviour
         {
             talkButton.interactable = true;
         }
+        if(collision.gameObject.tag == "Table")
+        {
+            eatButton.interactable = true;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
@@ -84,6 +90,35 @@ public class Player : MonoBehaviour
         {
             talkButton.interactable = false;
         }
+        if(collision.gameObject.tag == "Table")
+        {
+            eatButton.interactable = false;
+        }
+    }
+
+    //hard code for now because idk how to access food script through gm i think i did it wrong
+    public void Eat()
+    {
+        if(gm.foodNum == 0)
+        {
+            foodLevel += 40;
+            healthLevel += 20;
+            sanityLevel += 20;
+            roomMate.foodLevel += 40;
+        }else if (gm.foodNum == 1)
+        {
+            foodLevel += 30;
+            healthLevel += 10;
+            roomMate.foodLevel += 30;
+        }else if (gm.foodNum == 2)
+        {
+            foodLevel += 20;
+            roomMate.foodLevel += 20;
+        }
+
+        gm.dayPhase += 1;
+        gm.UpdateEnvironment();
+        CheckHunger();
     }
 
     public void Sleep()

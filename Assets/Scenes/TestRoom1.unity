@@ -1474,7 +1474,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9e4a9dbad6d0c8b4a964410fb50f47da,
+      objectReference: {fileID: 21300000, guid: d59b32809951ff14894d9c4d8aaef398,
         type: 3}
     - target: {fileID: 1738352185981854598, guid: e16e4a1e905c16440a095064d0cfe95d,
         type: 3}
