@@ -47,11 +47,89 @@ public class GameManager : MonoBehaviour
         else if (dayPhase == 3) { timeText.text = "P.M."; table.SetActive(false); lowerFloorText.text = "" + (floorNum + 1); food[foodNum].SetActive(false); }
         else if (dayPhase == 4) { dayCount += 1; dayPhase = 1; UpdateEnvironment(); }
 
-        if (dayCount == 4) { monthCount += 1; dayCount = 1; } //yes,theres 3days in a month for testing
+        if (dayCount == 4)
+        {
+            monthCount += 1;
+            dayCount = 1;
+
+            floorNum = Random.Range(2, 200);
+            UpdateEnvironment();
+        } //yes,theres 3days in a month for testing
+
     }
 
     public void GenerateFood()
     {
+        //foodNum 0 is best food, 3 is no food at all
+        //chances of getting better food is greater when floorNum is lower
+        //currently same "sections " of floors gets the same chance of food, this is to be improved using floorNum so the chances downgrades with every floor
+
+        if (floorNum < 20)
+        {
+            if (Random.Range(0f,10f) > 3f)
+            {
+                foodNum = 0;
+            }
+            else
+            {
+                foodNum = 1;
+            }
+        }else if (floorNum >= 20 && floorNum < 40)
+        {
+            if (Random.Range(0f,10f) > 7f)
+            {
+                foodNum = 0;
+            }
+            else
+            {
+                foodNum = 1;
+            }
+        }else if (floorNum >=40 && floorNum < 60)
+        {
+            if (Random.Range(0f,10f) > 3f)
+            {
+                foodNum = 1;
+            }
+            else
+            {
+                foodNum = 2;
+            }
+        }else if (floorNum >= 60 && floorNum < 80)
+        {
+            if (Random.Range(0f,10f) > 7f)
+            {
+                foodNum = 1;
+            }
+            else
+            {
+                foodNum = 2;
+            }
+        }else if (floorNum >= 80 && floorNum < 100)
+        {
+            if(Random.Range(0f,10f) > 3f)
+            {
+                foodNum = 2;
+            }
+            else
+            {
+                foodNum = 3;
+            }
+        }else if(floorNum >= 100 && floorNum < 160)
+        {
+            if(Random.Range(0f,10f) > 7f)
+            {
+                foodNum = 2;
+            }
+            else
+            {
+                foodNum = 3;
+            }
+        }else if (floorNum >= 160)
+        {
+            foodNum = 3;
+        }
+
+        //Spawn the food to the table
         food[foodNum].SetActive(true);
     }
 
