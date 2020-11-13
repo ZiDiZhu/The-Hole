@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public Text healthText;
     public Text sanityText;
 
+    public Text talkText;
+
     public Sprite playerSpriteNormal;
     public Sprite playerSpriteHungry;
     private SpriteRenderer spriteRenderer;
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = playerSpriteNormal;
+        roomMate.GetComponent<Roommate>().enabled = true;
 
         sleepButton.interactable = false;
         talkButton.interactable = false;
@@ -118,30 +121,55 @@ public class Player : MonoBehaviour
 
         gm.dayPhase += 1;
         gm.UpdateEnvironment();
+        roomMate.CheckStats();
         CheckHunger();
     }
 
     public void Sleep()
     {
-        healthLevel += 10;
-        foodLevel -= 20;
-        
         gm.dayPhase += 1;
         gm.UpdateEnvironment();
-
-        roomMate.foodLevel -= 10;
+        healthLevel += 10;
+        foodLevel -= 20;
         CheckHunger();
+        roomMate.foodLevel -= 10;
+        roomMate.CheckStats();
+
     }
 
     public void Talk()
     {
-        foodLevel -= 10;
-        sanityLevel += 10;
-        gm.dayPhase += 1;
-        gm.UpdateEnvironment();
-        roomMate.friendship += 10;
+        if (roomMate.isAlive)
+        {
+            foodLevel -= 10;
+            sanityLevel += 10;
+            gm.dayPhase += 1;
+            gm.UpdateEnvironment();
+            roomMate.friendship += 10;
+            roomMate.CheckStats();
+            CheckHunger();
+        }else if (!roomMate.isAlive)
+        {
+            if (!roomMate.isRotten)
+            {
+                roomMate.rotLevel += 10;
+                foodLevel += 40;
+                healthLevel += 20;
+                sanityLevel -= 10;
+                gm.dayPhase += 1;
+                gm.UpdateEnvironment();
+                CheckHunger();
+                roomMate.CheckStats();
+            }else if (roomMate.isRotten)
+            {
+                foodLevel += 40;
+                healthLevel -= 10;
+                sanityLevel -= 20;
+                gm.UpdateEnvironment();
+                CheckHunger();
+            }
+        }
 
-        CheckHunger();
     }
 
     public void CheckHunger()
@@ -157,5 +185,13 @@ public class Player : MonoBehaviour
         healthText.text = "Health: " + healthLevel + " / 100";
         foodText.text = "Food: " + foodLevel + " / 100";
         sanityText.text = "Sanity: " + sanityLevel + " / 100";
+
+        if (roomMate.isAlive)
+        {
+            talkText.text = "Talk";
+        }else if (!roomMate.isAlive)
+        {
+            talkText.text = "Eat Corpse";
+        }
     }
 }

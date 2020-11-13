@@ -1,49 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Roommate : MonoBehaviour
 {
-    public Player player;
 
     public int foodLevel;
     public int friendship;
 
+    public Text friendshipText;
+    public Text talkText;
+
+
+    public Player player;
+
     public Sprite normalspr;
     public Sprite hungryspr;
-    public Sprite deathspr;
+    public Sprite deathspr_starved;
+    public Sprite deathspr_rotten;
+
     private SpriteRenderer spriteRenderer;
 
     public bool isAlive;
+    public bool isRotten;
+    public int rotLevel;
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         isAlive = true;
-
+        isRotten = false;
     }
 
     void Update()
     {
-        
+
     }
-    
+
     public void CheckStats()
     {
-        if (foodLevel <= 50 && foodLevel >0)
+        if (foodLevel <= 50 && foodLevel > 0)
         {
             spriteRenderer.sprite = hungryspr;
+        }
+
+        if (friendship <= 30)
+        {
+            friendshipText.text = "unfriendly";
+        }
+        else if (friendship > 30 && friendship <= 70)
+        {
+            friendshipText.text = "neutral";
+        }
+        else if (friendship > 70)
+        {
+            friendshipText.text = "friendly";
         }
 
         if (foodLevel <= 0)
         {
             StarvedToDeath();
+            isAlive = false;
         }
     }
 
     public void StarvedToDeath()
     {
-        isAlive = false;
-        //add a death sprite
+
+        if (rotLevel >= 20)
+        {
+            spriteRenderer.sprite = deathspr_rotten;
+            isRotten = true;
+        }
+        else if (rotLevel < 20)
+        {
+            spriteRenderer.sprite = deathspr_starved;
+            talkText.text = "Eat Corpse";
+        }
     }
 }
