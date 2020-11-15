@@ -23,9 +23,12 @@ public class GameManager : MonoBehaviour
     public Text floorText;
     public Text lowerFloorText;
 
+    public Roommate roomMate;
+
     void Start()
     {
         UpdateEnvironment();
+        roomMate.GetComponent<Roommate>().enabled = true;
         //player = GetComponent<Player>();
     }
 
@@ -54,6 +57,10 @@ public class GameManager : MonoBehaviour
             dayCount = 1;
 
             floorNum = Random.Range(2, 200);
+            if (!roomMate.isAlive)
+            {
+                Destroy(roomMate.gameObject);
+            }
             UpdateEnvironment();
         } //yes,theres 3days in a month for testing
 

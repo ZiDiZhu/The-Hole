@@ -108,15 +108,19 @@ public class Player : MonoBehaviour
             healthLevel += 20;
             sanityLevel += 20;
             roomMate.foodLevel += 40;
-        }else if (gm.foodNum == 1)
+            roomMate.CheckStats();
+        }
+        else if (gm.foodNum == 1)
         {
             foodLevel += 30;
             healthLevel += 10;
             roomMate.foodLevel += 30;
+            roomMate.CheckStats();
         }else if (gm.foodNum == 2)
         {
             foodLevel += 20;
             roomMate.foodLevel += 20;
+            roomMate.CheckStats();
         }
 
         gm.dayPhase += 1;
@@ -130,9 +134,9 @@ public class Player : MonoBehaviour
         gm.dayPhase += 1;
         gm.UpdateEnvironment();
         healthLevel += 10;
-        foodLevel -= 20;
+        foodLevel -= 5;
         CheckHunger();
-        roomMate.foodLevel -= 10;
+        roomMate.foodLevel -= 5;
         roomMate.CheckStats();
 
     }
@@ -146,6 +150,7 @@ public class Player : MonoBehaviour
             gm.dayPhase += 1;
             gm.UpdateEnvironment();
             roomMate.friendship += 10;
+            roomMate.foodLevel -= 10;
             roomMate.CheckStats();
             CheckHunger();
         }else if (!roomMate.isAlive)
@@ -185,13 +190,5 @@ public class Player : MonoBehaviour
         healthText.text = "Health: " + healthLevel + " / 100";
         foodText.text = "Food: " + foodLevel + " / 100";
         sanityText.text = "Sanity: " + sanityLevel + " / 100";
-
-        if (roomMate.isAlive)
-        {
-            talkText.text = "Talk";
-        }else if (!roomMate.isAlive)
-        {
-            talkText.text = "Eat Corpse";
-        }
     }
 }

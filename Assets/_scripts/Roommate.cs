@@ -40,9 +40,12 @@ public class Roommate : MonoBehaviour
 
     public void CheckStats()
     {
-        if (foodLevel <= 50 && foodLevel > 0)
+        if (foodLevel < 50 && foodLevel > 0)
         {
             spriteRenderer.sprite = hungryspr;
+        }else if (foodLevel > 50)
+        {
+            spriteRenderer.sprite = normalspr;
         }
 
         if (friendship <= 30)
@@ -73,7 +76,7 @@ public class Roommate : MonoBehaviour
             spriteRenderer.sprite = deathspr_rotten;
             isRotten = true;
         }
-        else if (rotLevel < 20)
+        else
         {
             spriteRenderer.sprite = deathspr_starved;
             talkText.text = "Eat Corpse";
