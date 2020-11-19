@@ -1,0 +1,14 @@
+For testing convinience, this file only contains the build.
+
+For the project in unity and development notes, please download from Github:
+https://github.com/ZiDiZhu/The-Hole
+
+
+End game conditions are not added yet,
+NPC behaviour is incomplete,
+no dialogue system yet.
+
+Goal: try to keep all your stats above 0 (the maximum is meant to be 150 but didn't add yet)
+if your roomate dies, he will not be respawn.
+
+Controls: WASD to move, click button to perform action.
