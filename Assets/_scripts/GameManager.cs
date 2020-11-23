@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public int dayPhase = 1; //1 represents AM, 2 represents lunchtime, 3 represents PM
     public GameObject table;
 
+    public GameObject nightFilter; //dark red panel to indicate night time
+
     public int floorNum;
     public int monthCount;
     public int dayCount = 0;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
         UpdateEnvironment();
         roomMate.GetComponent<Roommate>().enabled = true;
         //player = GetComponent<Player>();
+        nightFilter.SetActive(false);
     }
 
     
@@ -46,9 +49,19 @@ public class GameManager : MonoBehaviour
         dayText.text = "Day " + dayCount;
         monthText.text = "Month " + monthCount;
 
-        if (dayPhase == 1) { timeText.text = "A.M."; table.SetActive(false);}
+        if (dayPhase == 1) {
+            timeText.text = "A.M.";
+            table.SetActive(false);
+            nightFilter.SetActive(false);
+        }
         else if (dayPhase == 2) { timeText.text = "LUNCH"; table.SetActive(true); lowerFloorText.text = ""; GenerateFood(); }
-        else if (dayPhase == 3) { timeText.text = "P.M."; table.SetActive(false); lowerFloorText.text = "" + (floorNum + 1); food[foodNum].SetActive(false); }
+        else if (dayPhase == 3) {
+            timeText.text = "P.M.";
+            table.SetActive(false);
+            lowerFloorText.text = "" + (floorNum + 1);
+            food[foodNum].SetActive(false);
+            nightFilter.SetActive(true);
+        }
         else if (dayPhase == 4) { dayCount += 1; dayPhase = 1; UpdateEnvironment(); }
 
         if (dayCount == 4)
@@ -59,7 +72,7 @@ public class GameManager : MonoBehaviour
             floorNum = Random.Range(2, 200);
             if (!roomMate.isAlive)
             {
-                Destroy(roomMate.gameObject);
+                roomMate.ChangeRoomMate();
             }
             UpdateEnvironment();
         } //yes,theres 3days in a month for testing

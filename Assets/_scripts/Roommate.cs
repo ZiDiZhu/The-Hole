@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Roommate : MonoBehaviour
 {
 
+    public GameManager gm;
+
     public int foodLevel;
     public int friendship;
 
@@ -16,7 +18,9 @@ public class Roommate : MonoBehaviour
     public Player player;
 
     public Sprite normalspr;
+    public Sprite sleepingspr;
     public Sprite hungryspr;
+    public Sprite deathspr_killed;
     public Sprite deathspr_starved;
     public Sprite deathspr_rotten;
 
@@ -33,6 +37,11 @@ public class Roommate : MonoBehaviour
         isRotten = false;
     }
 
+    void Start()
+    {
+        friendshipText.text = "unfriendly";    
+    }
+
     void Update()
     {
 
@@ -40,10 +49,14 @@ public class Roommate : MonoBehaviour
 
     public void CheckStats()
     {
-        if (foodLevel < 50 && foodLevel > 0)
+        if (gm.dayPhase ==3 && isAlive)
+        {
+            spriteRenderer.sprite = sleepingspr;
+        }
+        if (foodLevel < 50 && foodLevel > 0 && isAlive && gm.dayPhase != 3)
         {
             spriteRenderer.sprite = hungryspr;
-        }else if (foodLevel > 50)
+        }else if (foodLevel > 50 &&isAlive && gm.dayPhase !=3)
         {
             spriteRenderer.sprite = normalspr;
         }
@@ -61,7 +74,7 @@ public class Roommate : MonoBehaviour
             friendshipText.text = "friendly";
         }
 
-        if (foodLevel <= 0)
+        if (foodLevel <= 0 && isAlive)
         {
             StarvedToDeath();
             isAlive = false;
@@ -81,5 +94,26 @@ public class Roommate : MonoBehaviour
             spriteRenderer.sprite = deathspr_starved;
             talkText.text = "Eat Corpse";
         }
+    }
+
+    public void Killed()
+    {
+        isAlive = false;
+        
+        if (rotLevel >= 20)
+        {
+            spriteRenderer.sprite = deathspr_rotten;
+            isRotten = true;
+        }
+        else
+        {
+            spriteRenderer.sprite = deathspr_killed;
+            talkText.text = "Eat Corpse";
+        }
+    }
+
+    public void ChangeRoomMate()
+    {
+
     }
 }

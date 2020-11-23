@@ -10,8 +10,6 @@ public class ItemSelect : MonoBehaviour
 
     public GameObject[] item; // 0 =dog, 1=book, 2=vitamins, 3=knife
 
-    public Player player;
-
     public bool hasDog;
     public bool hasBook;
     public bool hasKnife;
