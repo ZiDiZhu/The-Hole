@@ -196,13 +196,39 @@ public class Player : MonoBehaviour
         if(foodLevel < 50)
         {
             spriteRenderer.sprite = playerSpriteHungry;
+            if(foodLevel <= 0)
+            {
+                Death();
+            }
         }else if(foodLevel >= 50)
         {
             spriteRenderer.sprite = playerSpriteNormal;
+            if(foodLevel > 150)
+            {
+                foodLevel = 150;
+                Debug.Log("FOOD MAXED OUT");
+            }
+        }
+
+        if(healthLevel > 150)
+        {
+            healthLevel = 150;
+            Debug.Log("health MAXED OUT");
+        }
+
+        if (sanityLevel > 150)
+        {
+            sanityLevel = 150;
+            Debug.Log("sanity MAXED OUT");
         }
 
         healthText.text = "Health: " + healthLevel + " / 150";
         foodText.text = "Food: " + foodLevel + " / 150";
         sanityText.text = "Sanity: " + sanityLevel + " / 150";
+    }
+
+    public void Death()
+    {
+        Debug.Log("you're dead");
     }
 }

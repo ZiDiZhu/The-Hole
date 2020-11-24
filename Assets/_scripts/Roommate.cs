@@ -13,7 +13,7 @@ public class Roommate : MonoBehaviour
 
     public Text friendshipText;
     public Text talkText;
-
+    public Text foodLevelText;
 
     public Player player;
 
@@ -39,7 +39,7 @@ public class Roommate : MonoBehaviour
 
     void Start()
     {
-        friendshipText.text = "unfriendly";    
+        CheckStats();
     }
 
     void Update()
@@ -49,27 +49,35 @@ public class Roommate : MonoBehaviour
 
     public void CheckStats()
     {
+        if (foodLevel > 150)
+        {
+            foodLevel = 150;
+            foodLevelText.text = "well fed";
+        }
+
         if (gm.dayPhase ==3 && isAlive)
         {
             spriteRenderer.sprite = sleepingspr;
         }
-        if (foodLevel < 50 && foodLevel > 0 && isAlive && gm.dayPhase != 3)
+        if (foodLevel < 70 && foodLevel > 0 && isAlive && gm.dayPhase != 3)
         {
             spriteRenderer.sprite = hungryspr;
-        }else if (foodLevel > 50 &&isAlive && gm.dayPhase !=3)
+            foodLevelText.text = "hungry";
+        }else if (foodLevel > 70 &&isAlive && gm.dayPhase !=3)
         {
             spriteRenderer.sprite = normalspr;
+            foodLevelText.text = "not hungry";
         }
 
-        if (friendship <= 30)
+        if (friendship <= 30&& isAlive)
         {
             friendshipText.text = "unfriendly";
         }
-        else if (friendship > 30 && friendship <= 70)
+        else if (friendship > 30 && friendship <= 70 && isAlive)
         {
             friendshipText.text = "neutral";
         }
-        else if (friendship > 70)
+        else if (friendship > 70 && isAlive)
         {
             friendshipText.text = "friendly";
         }
@@ -86,6 +94,8 @@ public class Roommate : MonoBehaviour
 
         if (rotLevel >= 20)
         {
+            foodLevelText.text = "rotten";
+            friendshipText.text = "dead";
             spriteRenderer.sprite = deathspr_rotten;
             isRotten = true;
         }
@@ -93,6 +103,8 @@ public class Roommate : MonoBehaviour
         {
             spriteRenderer.sprite = deathspr_starved;
             talkText.text = "Eat Corpse";
+            foodLevelText.text = "fresh corpse";
+            friendshipText.text = "dead";
         }
     }
 
