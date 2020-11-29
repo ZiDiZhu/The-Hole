@@ -179,6 +179,9 @@ public class Player : MonoBehaviour
         {
             if (!roomMate.isRotten)
             {
+                foodLevel += item.foodVar[4];
+                healthLevel += item.healthVar[4];
+                sanityLevel += item.sanVar[4];
                 roomMate.rotLevel += 10;
                 gm.dayPhase += 1;
                 gm.UpdateEnvironment();

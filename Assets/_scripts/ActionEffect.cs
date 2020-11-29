@@ -7,8 +7,9 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class ActionEffect : MonoBehaviour
 {
-    static AudioSource audioSource;
-    public static AudioClip hover1;
+    private AudioSource audioSource;
+    public AudioClip hover1;
+    public AudioClip click2;
 
     public Player player;
     public Roommate roommate;
@@ -31,6 +32,11 @@ public class ActionEffect : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void confirmSFX()
+    {
+        audioSource.PlayOneShot(click2);
     }
 
     public void food()
@@ -76,6 +82,7 @@ public class ActionEffect : MonoBehaviour
 
     public void talkEffect()
     {
+        audioSource.PlayOneShot(hover1);
         if (roommate.isAlive)
         {
             ui[2].gameObject.SetActive(true);
@@ -110,6 +117,7 @@ public class ActionEffect : MonoBehaviour
 
     public void sleepEffect()
     {
+        audioSource.PlayOneShot(hover1);
         log.text = "Sleep..because there ain't much to do here";
         ui[4].gameObject.SetActive(true);
         foodVar.text = " " + item.foodVar[3];
@@ -119,6 +127,7 @@ public class ActionEffect : MonoBehaviour
 
     public void vitamin()
     {
+        audioSource.PlayOneShot(hover1);
         if (item.vitaminsLeft >=1)
         {
             log.text = "multi-vitamins! 'nutritional supplements, cannot substitute food', says the label";
@@ -136,7 +145,8 @@ public class ActionEffect : MonoBehaviour
 
     public void knife()
     {
-        if(gm.dayPhase == 3)
+        audioSource.PlayOneShot(hover1);
+        if (gm.dayPhase == 3)
         {
             log.text = "..you chose the knife for a reason. Do it, it's for your survival.";
             ui[3].gameObject.SetActive(true);
