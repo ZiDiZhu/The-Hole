@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public Text lowerFloorText;
 
     public Roommate roomMate;
+    public GameObject[] roomMatesStuff;
 
     void Start()
     {
@@ -70,6 +71,12 @@ public class GameManager : MonoBehaviour
         {
             monthCount += 1;
             dayCount = 0;
+            if (!roomMate.isAlive)
+            {
+                Destroy(roomMate.gameObject);
+                roomMatesStuff[0].SetActive(false);
+                roomMatesStuff[1].SetActive(false);
+            }
 
             floorNum = Random.Range(2, 200);
             if (!roomMate.isAlive)
