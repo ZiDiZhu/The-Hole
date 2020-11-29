@@ -33,4 +33,35 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
+    public void restart()
+    {
+        SceneManager.LoadScene("Intro");
+    }
+
+    public void end1_starved()
+    {
+        SceneManager.LoadScene("End1_starvation");
+    }
+
+    public void end2_killed()
+    {
+        SceneManager.LoadScene("End2_killed");
+    }
+
+    public void end3_suicide()
+    {
+        SceneManager.LoadScene("End3_suicide");
+    }
+
+
+    public void end4_survive()
+    {
+        SceneManager.LoadScene("End4_survived");
+    }
 }

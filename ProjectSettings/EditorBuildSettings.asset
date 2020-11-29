@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 9bb9732f2f9394140a926c293fe1c055
+  - enabled: 1
+    path: Assets/Scenes/End1_starvation.unity
+    guid: bb2d0bc5fcc290b44bc17dd8554772b1
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 9247bfce5d7b68f45aa6d2deeabbb094
+  - enabled: 1
+    path: Assets/Scenes/End2_killed.unity
+    guid: 6bb92141c11cf714d9ea65f2a907a246
+  - enabled: 1
+    path: Assets/Scenes/End3_suicide.unity
+    guid: 73df9a7908c1e3543acb2e678c2fa461
+  - enabled: 1
+    path: Assets/Scenes/End4_survived.unity
+    guid: a4e992a973530094b9cec48987f84b06
   m_configObjects: {}

@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
+[RequireComponent(typeof(AudioSource))]
 public class ActionEffect : MonoBehaviour
 {
+    static AudioSource audioSource;
+    public static AudioClip hover1;
+
     public Player player;
     public Roommate roommate;
     public GameManager gm;
@@ -20,6 +25,7 @@ public class ActionEffect : MonoBehaviour
     void Start()
     {
         disableEffect();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -29,7 +35,8 @@ public class ActionEffect : MonoBehaviour
 
     public void food()
     {
-      if(gm.dayPhase == 2)
+        audioSource.PlayOneShot(hover1);
+        if (gm.dayPhase == 2)
         {
             if (gm.foodNum == 0)
             {

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject nightFilter; //dark red panel to indicate night time
 
+    public SceneChanger scene;
+
     public int floorNum;
     public int monthCount;
     public int dayCount = 0;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
         floorText.text = "" + floorNum;
         lowerFloorText.text = "" + (floorNum + 1);
 
-        dayText.text = "Day " + dayCount;
+        dayText.text = "Week " + dayCount;
         monthText.text = "Month " + monthCount;
 
         if (dayPhase == 1) {
@@ -64,10 +66,10 @@ public class GameManager : MonoBehaviour
         }
         else if (dayPhase == 4) { dayCount += 1; dayPhase = 1; UpdateEnvironment(); }
 
-        if (dayCount == 4)
+        if (dayCount == 5)
         {
             monthCount += 1;
-            dayCount = 1;
+            dayCount = 0;
 
             floorNum = Random.Range(2, 200);
             if (!roomMate.isAlive)
@@ -75,7 +77,12 @@ public class GameManager : MonoBehaviour
                 roomMate.ChangeRoomMate();
             }
             UpdateEnvironment();
-        } //yes,theres 3days in a month for testing
+        } 
+
+        if(monthCount == 7)
+        {
+            scene.end4_survive();
+        }
 
     }
 

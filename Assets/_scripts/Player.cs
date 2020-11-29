@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
     public GameManager gm;
     public Roommate roomMate;
     public ItemEffect item;
+    public SceneChanger scene;
 
     public int foodLevel;
     public int healthLevel;
     public int sanityLevel;
+
+    public GameObject healthdownlogo;
 
     public Button eatButton;
     public Button sleepButton;
@@ -163,8 +166,9 @@ public class Player : MonoBehaviour
     {
         if (roomMate.isAlive)
         {
-            foodLevel -= 10;
-            sanityLevel += 5;
+            foodLevel += item.foodVar[6];
+            healthLevel += item.healthVar[6];
+            sanityLevel += item.sanVar[6];
             gm.dayPhase += 1;
             gm.UpdateEnvironment();
             roomMate.friendship += 10;
@@ -176,18 +180,15 @@ public class Player : MonoBehaviour
             if (!roomMate.isRotten)
             {
                 roomMate.rotLevel += 10;
-                foodLevel += 40;
-                healthLevel += 20;
-                sanityLevel -= 10;
                 gm.dayPhase += 1;
                 gm.UpdateEnvironment();
                 CheckHunger();
                 roomMate.StarvedToDeath();
             }else if (roomMate.isRotten)
             {
-                foodLevel += 40;
-                healthLevel -= 10;
-                sanityLevel -= 20;
+                foodLevel += item.foodVar[5];
+                healthLevel += item.healthVar[5];
+                sanityLevel += item.sanVar[5];
                 gm.dayPhase += 1;
                 gm.UpdateEnvironment();
                 CheckHunger();
@@ -204,9 +205,17 @@ public class Player : MonoBehaviour
             spriteRenderer.sprite = playerSpriteHungry;
             if(foodLevel <= 0)
             {
-                Death();
+                foodLevel = 0;
+                healthLevel -= 20;
+                healthdownlogo.SetActive(true);
             }
-        }else if(foodLevel >= 50)
+            else
+            {
+                healthdownlogo.SetActive(false);
+            }
+
+        }
+        else if(foodLevel >= 50)
         {
             spriteRenderer.sprite = playerSpriteNormal;
             if(foodLevel > 150)
@@ -221,11 +230,23 @@ public class Player : MonoBehaviour
             healthLevel = 150;
             Debug.Log("health MAXED OUT");
         }
-
+        if(healthLevel <= 0)
+        {
+            healthLevel = 0;
+            if(foodLevel <= 0)
+            {
+                scene.end1_starved();
+            }
+        }
         if (sanityLevel > 150)
         {
             sanityLevel = 150;
             Debug.Log("sanity MAXED OUT");
+        }
+
+        if (sanityLevel <= 0)
+        {
+            scene.end3_suicide();
         }
 
         healthText.text = "Health: " + healthLevel + " / 150";

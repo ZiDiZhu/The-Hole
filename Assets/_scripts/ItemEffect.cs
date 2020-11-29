@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ItemEffect : MonoBehaviour
 {
+
     public GameManager gm;
     public Player player;
     public Roommate roommate;
@@ -48,7 +49,7 @@ public class ItemEffect : MonoBehaviour
         if(vitaminsLeft >= 1)
         {
             player.healthLevel += healthVar[7];
-            player.foodLevel -= foodVar[7];
+            player.foodLevel += foodVar[7];
             vitaminsLeft -= 1;
             pillslefttxt.text = "pills left: " + vitaminsLeft;
             player.CheckHunger();
@@ -90,7 +91,7 @@ public class ItemEffect : MonoBehaviour
     {
         roommate.Killed();
         player.healthLevel += healthVar[8];
-        player.sanityLevel -= sanVar[8];
+        player.sanityLevel += sanVar[8];
         player.CheckHunger();
         eatCorpseBtn.interactable = true;
     }

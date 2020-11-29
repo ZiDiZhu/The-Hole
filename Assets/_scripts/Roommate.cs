@@ -7,6 +7,7 @@ public class Roommate : MonoBehaviour
 {
 
     public GameManager gm;
+    public SceneChanger scene;
 
     public int foodLevel;
     public int friendship;
@@ -72,6 +73,10 @@ public class Roommate : MonoBehaviour
         if (friendship <= 30&& isAlive)
         {
             friendshipText.text = "unfriendly";
+            if(this.foodLevel <= 10)
+            {
+                scene.end2_killed();
+            }
         }
         else if (friendship > 30 && friendship <= 70 && isAlive)
         {
