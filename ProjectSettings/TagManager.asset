@@ -8,6 +8,7 @@ TagManager:
   - Bed
   - Table
   - Dog
+  - talkButton
   layers:
   - Default
   - TransparentFX

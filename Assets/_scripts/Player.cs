@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     public GameManager gm;
     public Roommate roomMate;
+    public ItemEffect item;
 
     public int foodLevel;
     public int healthLevel;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         talkButton.interactable = false;
         eatButton.interactable = false;
         useKnifeButton.interactable = false;
+        CheckHunger();
     }
 
     void Update()
@@ -116,22 +118,25 @@ public class Player : MonoBehaviour
     {
         if(gm.foodNum == 0)
         {
-            foodLevel += 40;
-            healthLevel += 20;
-            sanityLevel += 20;
-            roomMate.foodLevel += 40;
+            foodLevel += item.foodVar[0];
+            healthLevel += item.healthVar[0];
+            sanityLevel += item.sanVar[0];
+            roomMate.foodLevel += item.foodVar[0];
             roomMate.CheckStats();
         }
         else if (gm.foodNum == 1)
         {
-            foodLevel += 30;
-            healthLevel += 10;
-            roomMate.foodLevel += 30;
+            foodLevel += item.foodVar[1];
+            healthLevel += item.healthVar[1];
+            sanityLevel += item.sanVar[1];
+            roomMate.foodLevel += item.foodVar[1];
             roomMate.CheckStats();
         }else if (gm.foodNum == 2)
         {
-            foodLevel += 20;
-            roomMate.foodLevel += 20;
+            foodLevel += item.foodVar[2];
+            healthLevel += item.healthVar[2];
+            sanityLevel += item.sanVar[2];
+            roomMate.foodLevel += item.healthVar[2];
             roomMate.CheckStats();
         }
 
@@ -145,10 +150,11 @@ public class Player : MonoBehaviour
     {
         gm.dayPhase += 1;
         gm.UpdateEnvironment();
-        healthLevel += 10;
-        foodLevel -= 10;
+        healthLevel += item.healthVar[3];
+        foodLevel += item.foodVar[3];
+        sanityLevel += item.sanVar[3];
         CheckHunger();
-        roomMate.foodLevel -= 5;
+        roomMate.foodLevel += item.foodVar[3];
         roomMate.CheckStats();
 
     }
