@@ -9,6 +9,12 @@ public class ItemEffect : MonoBehaviour
     public Player player;
     public Roommate roommate;
 
+    public Button eatVitamins;
+    public Text pillslefttxt;
+    public Button eatCorpseBtn;
+
+    public int vitaminsLeft = 10;
+
     public int[] foodVar;
     /*0: 0food (best);
      1: 1food 
@@ -39,14 +45,23 @@ public class ItemEffect : MonoBehaviour
 
     public void EatVitamins()
     {
-        player.healthLevel += 20;
-        player.foodLevel -= 5;
-        player.sanityLevel += 5;
-        player.CheckHunger();
-        roommate.foodLevel -= 10;
-        gm.dayPhase += 1;
-        gm.UpdateEnvironment();
-        roommate.CheckStats();
+        if(vitaminsLeft >= 1)
+        {
+            player.healthLevel += healthVar[7];
+            player.foodLevel -= foodVar[7];
+            vitaminsLeft -= 1;
+            pillslefttxt.text = "pills left: " + vitaminsLeft;
+            player.CheckHunger();
+            roommate.foodLevel -= 10;
+            gm.dayPhase += 1;
+            gm.UpdateEnvironment();
+            roommate.CheckStats();
+        }
+        else
+        {
+            Debug.Log("no more pills left");
+            eatVitamins.interactable = false;
+        }
     }
 
     public void ReadBook()
@@ -74,7 +89,10 @@ public class ItemEffect : MonoBehaviour
     public void UseKnife()
     {
         roommate.Killed();
-        player.healthLevel -= 40;
+        player.healthLevel += healthVar[8];
+        player.sanityLevel -= sanVar[8];
+        player.CheckHunger();
+        eatCorpseBtn.interactable = true;
     }
 
 }
